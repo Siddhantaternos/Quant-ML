@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Siddhant's 2026 ML Roadmap</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap');
+
+:root {
+  --bg: #08080f;
+  --surface: #0f0f1a;
+  --card: #13131f;
+  --border: #1e1e32;
+  --border2: #2a2a42;
+  --accent: #7c6df7;
+  --accent2: #f7c26d;
+  --green: #3ddc97;
+  --red: #f76d7c;
+  --blue: #6dcbf7;
+  --text: #e8e8f5;
+  --muted: #6b6b90;
+  --dim: #2e2e4a;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Space Grotesk', sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── NAV ───────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(8,8,15,0.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 54px;
+}
+.nav-brand {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px; font-weight: 500;
+  color: var(--accent);
+  letter-spacing: 1px;
+}
+.nav-links { display: flex; gap: 4px; }
+.nav-links a {
+  font-size: 12px; color: var(--muted);
+  padding: 6px 12px; border-radius: 6px;
+  text-decoration: none; transition: all 0.15s;
+  font-weight: 500;
+}
+.nav-links a:hover { color: var(--text); background: var(--border); }
+.streak-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; font-weight: 500;
+  background: linear-gradient(135deg, var(--accent2), #f79c6d);
+  color: #0a0808; padding: 4px 12px; border-radius: 20px;
+  cursor: pointer;
+}
+
+/* ── HERO ───────────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  padding: 120px 24px 60px;
+  position: relative; overflow: hidden;
+}
+.hero-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(124,109,247,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(124,109,247,0.06) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black, transparent);
+}
+.hero-glow {
+  position: absolute;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(124,109,247,0.12) 0%, transparent 70%);
+  border-radius: 50%; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.hero-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 3px;
+  color: var(--accent); margin-bottom: 20px;
+  text-transform: uppercase;
+  display: flex; align-items: center; gap: 8px;
+}
+.hero-eyebrow::before, .hero-eyebrow::after {
+  content: ''; width: 32px; height: 1px; background: var(--accent);
+}
+.hero h1 {
+  font-size: clamp(36px, 8vw, 76px);
+  font-weight: 700; line-height: 1.05;
+  letter-spacing: -2px; margin-bottom: 16px;
+}
+.hero h1 .g1 { color: var(--text); }
+.hero h1 .g2 {
+  background: linear-gradient(135deg, var(--accent), var(--blue));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.hero-sub {
+  font-size: 16px; color: var(--muted); max-width: 540px;
+  margin: 0 auto 40px; line-height: 1.7;
+}
+.hero-stats {
+  display: flex; gap: 32px; flex-wrap: wrap; justify-content: center;
+  margin-bottom: 48px;
+}
+.hero-stat { text-align: center; }
+.hero-stat-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 28px; font-weight: 500;
+  color: var(--accent2); display: block;
+}
+.hero-stat-label {
+  font-size: 11px; color: var(--muted);
+  text-transform: uppercase; letter-spacing: 1px;
+}
+.cta-group { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+.btn-primary {
+  background: var(--accent); color: white;
+  padding: 12px 28px; border-radius: 8px;
+  font-weight: 600; font-size: 14px;
+  text-decoration: none; border: none; cursor: pointer;
+  transition: all 0.2s;
+  font-family: 'Space Grotesk', sans-serif;
+}
+.btn-primary:hover { background: #9585f9; transform: translateY(-1px); }
+.btn-ghost {
+  background: transparent; color: var(--text);
+  padding: 12px 28px; border-radius: 8px;
+  font-weight: 600; font-size: 14px;
+  border: 1px solid var(--border2); cursor: pointer;
+  transition: all 0.2s; text-decoration: none;
+  font-family: 'Space Grotesk', sans-serif;
+}
+.btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ── SECTIONS ───────────────────────────────── */
+section { padding: 80px 24px; max-width: 1100px; margin: 0 auto; }
+.section-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 3px;
+  color: var(--accent); text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.section-title {
+  font-size: clamp(22px, 4vw, 36px);
+  font-weight: 700; letter-spacing: -1px;
+  margin-bottom: 8px;
+}
+.section-sub { font-size: 14px; color: var(--muted); margin-bottom: 40px; }
+
+/* ── MARKET DEMAND BARS ──────────────────────── */
+.market-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px; margin-bottom: 48px;
+}
+.market-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px 20px;
+  transition: border-color 0.2s;
+}
+.market-card:hover { border-color: var(--border2); }
+.market-card-top {
+  display: flex; justify-content: space-between;
+  align-items: flex-start; margin-bottom: 12px;
+}
+.market-skill { font-size: 14px; font-weight: 600; }
+.market-delta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; font-weight: 500;
+  padding: 2px 8px; border-radius: 4px;
+  background: rgba(61,220,151,0.12);
+  color: var(--green);
+}
+.market-delta.hot { background: rgba(247,194,109,0.12); color: var(--accent2); }
+.market-delta.fire { background: rgba(124,109,247,0.15); color: var(--accent); }
+.bar-track {
+  height: 5px; background: var(--dim);
+  border-radius: 3px; overflow: hidden;
+}
+.bar-fill {
+  height: 100%; border-radius: 3px;
+  transition: width 1.5s cubic-bezier(0.4,0,0.2,1);
+  width: 0;
+}
+.bar-fill.purple { background: linear-gradient(90deg, var(--accent), var(--blue)); }
+.bar-fill.gold { background: linear-gradient(90deg, var(--accent2), #f79c6d); }
+.bar-fill.green { background: linear-gradient(90deg, var(--green), #6df7c2); }
+.bar-fill.red { background: linear-gradient(90deg, var(--red), #f79c6d); }
+.market-note { font-size: 11px; color: var(--muted); margin-top: 6px; font-family: 'JetBrains Mono', monospace; }
+
+/* ── PHASE TIMELINE ─────────────────────────── */
+.timeline { position: relative; padding-left: 0; }
+.timeline::before {
+  content: '';
+  position: absolute; left: 24px; top: 32px; bottom: 32px;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--accent), var(--blue), var(--accent2), var(--green));
+}
+.phase {
+  display: flex; gap: 24px;
+  margin-bottom: 28px; position: relative;
+}
+.phase-dot {
+  width: 48px; height: 48px; flex-shrink: 0;
+  border-radius: 50%;
+  border: 2px solid var(--border2);
+  background: var(--card);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; font-weight: 500;
+  z-index: 1; cursor: pointer;
+  transition: all 0.2s;
+}
+.phase-dot.active { border-color: var(--accent); color: var(--accent); background: rgba(124,109,247,0.1); }
+.phase-body {
+  flex: 1; background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px; padding: 20px 24px;
+  cursor: pointer; transition: border-color 0.2s;
+}
+.phase-body:hover { border-color: var(--border2); }
+.phase-body.open { border-color: var(--accent); }
+.phase-header {
+  display: flex; justify-content: space-between; align-items: center;
+}
+.phase-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; color: var(--muted); letter-spacing: 1px;
+  text-transform: uppercase; margin-bottom: 4px;
+}
+.phase-name { font-size: 17px; font-weight: 700; }
+.phase-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; padding: 3px 8px;
+  border-radius: 4px; border: 1px solid var(--border);
+  color: var(--muted);
+}
+.tag.hot { border-color: rgba(247,194,109,0.4); color: var(--accent2); }
+.tag.new { border-color: rgba(124,109,247,0.4); color: var(--accent); }
+.tag.must { border-color: rgba(61,220,151,0.4); color: var(--green); }
+.phase-expand {
+  width: 28px; height: 28px;
+  border: 1px solid var(--border); border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; color: var(--muted);
+  transition: all 0.2s; flex-shrink: 0;
+}
+.phase-content {
+  display: none; margin-top: 20px;
+  border-top: 1px solid var(--border); padding-top: 20px;
+}
+.phase-content.open { display: block; }
+.skill-list { display: flex; flex-direction: column; gap: 8px; }
+.skill-item {
+  display: flex; gap: 12px; align-items: flex-start;
+  padding: 10px 14px; border-radius: 8px;
+  background: var(--surface); border: 1px solid var(--border);
+  cursor: pointer; transition: all 0.15s;
+}
+.skill-item:hover { border-color: var(--border2); }
+.skill-item.done { opacity: 0.5; }
+.skill-check {
+  width: 18px; height: 18px; border-radius: 4px;
+  border: 2px solid var(--border2); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; transition: all 0.15s; margin-top: 1px;
+}
+.skill-check.checked { background: var(--green); border-color: var(--green); }
+.skill-info { flex: 1; }
+.skill-name { font-size: 13px; font-weight: 600; }
+.skill-why { font-size: 11px; color: var(--muted); font-family: 'JetBrains Mono', monospace; margin-top: 2px; }
+.skill-priority {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; padding: 2px 6px; border-radius: 3px;
+  flex-shrink: 0; align-self: flex-start; margin-top: 2px;
+}
+.p-critical { background: rgba(247,109,124,0.15); color: var(--red); }
+.p-high { background: rgba(247,194,109,0.15); color: var(--accent2); }
+.p-medium { background: rgba(124,109,247,0.15); color: var(--accent); }
+
+/* ── DAILY TRACKER ──────────────────────────── */
+.tracker-wrap {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px; padding: 32px;
+  margin-bottom: 32px;
+}
+.tracker-header {
+  display: flex; justify-content: space-between;
+  align-items: center; margin-bottom: 28px;
+  flex-wrap: wrap; gap: 12px;
+}
+.tracker-title { font-size: 20px; font-weight: 700; }
+.streak-display {
+  display: flex; align-items: center; gap: 8px;
+  background: rgba(247,194,109,0.1);
+  border: 1px solid rgba(247,194,109,0.3);
+  border-radius: 8px; padding: 8px 16px;
+}
+.streak-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 24px; font-weight: 500;
+  color: var(--accent2);
+}
+.streak-label { font-size: 12px; color: var(--muted); }
+.date-display {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; color: var(--muted);
+  margin-bottom: 20px;
+}
+.daily-tasks { display: flex; flex-direction: column; gap: 8px; }
+.daily-task {
+  display: flex; gap: 14px; align-items: center;
+  padding: 14px 16px; border-radius: 8px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  cursor: pointer; transition: all 0.15s;
+  user-select: none;
+}
+.daily-task:hover { border-color: var(--border2); }
+.daily-task.done-task {
+  border-color: rgba(61,220,151,0.3);
+  background: rgba(61,220,151,0.04);
+}
+.task-check {
+  width: 22px; height: 22px; border-radius: 6px;
+  border: 2px solid var(--border2); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; transition: all 0.2s;
+}
+.task-check.ticked { background: var(--green); border-color: var(--green); }
+.task-text { flex: 1; }
+.task-name { font-size: 14px; font-weight: 500; }
+.done-task .task-name { text-decoration: line-through; color: var(--muted); }
+.task-cat {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; color: var(--muted); margin-top: 2px;
+}
+.task-time {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--muted);
+  flex-shrink: 0;
+}
+.progress-bar-wrap {
+  margin: 20px 0 8px;
+  background: var(--dim); border-radius: 4px;
+  height: 6px; overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%; background: linear-gradient(90deg, var(--green), var(--accent));
+  border-radius: 4px; transition: width 0.4s;
+}
+.progress-text {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; color: var(--muted);
+  display: flex; justify-content: space-between;
+}
+.btn-reset {
+  margin-top: 16px;
+  background: transparent; border: 1px solid var(--border);
+  color: var(--muted); padding: 8px 16px;
+  border-radius: 6px; cursor: pointer;
+  font-size: 12px; font-family: 'Space Grotesk', sans-serif;
+  transition: all 0.2s;
+}
+.btn-reset:hover { border-color: var(--red); color: var(--red); }
+
+/* ── STREAK CALENDAR ────────────────────────── */
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px; margin-top: 16px;
+}
+.cal-day {
+  aspect-ratio: 1; border-radius: 4px;
+  background: var(--dim); cursor: pointer;
+  transition: all 0.15s; position: relative;
+}
+.cal-day:hover { background: var(--border2); }
+.cal-day.filled { background: var(--green); opacity: 0.7; }
+.cal-day.filled.today { opacity: 1; box-shadow: 0 0 0 2px var(--green); }
+.cal-day.today { background: rgba(124,109,247,0.3); box-shadow: 0 0 0 2px var(--accent); }
+.cal-month-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--muted); margin: 12px 0 6px;
+}
+.cal-day-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; color: var(--muted); text-align: center;
+  padding-bottom: 4px;
+}
+
+/* ── SALARY MAP ─────────────────────────────── */
+.salary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+}
+.salary-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 20px;
+  transition: all 0.2s;
+}
+.salary-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+.salary-flag { font-size: 24px; margin-bottom: 8px; }
+.salary-role { font-size: 13px; font-weight: 700; margin-bottom: 2px; }
+.salary-company { font-size: 11px; color: var(--muted); margin-bottom: 12px; font-family: 'JetBrains Mono', monospace; }
+.salary-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 20px; font-weight: 500;
+  color: var(--accent2); margin-bottom: 4px;
+}
+.salary-note { font-size: 11px; color: var(--muted); }
+
+/* ── TOAST ──────────────────────────────────── */
+.toast {
+  position: fixed; bottom: 24px; right: 24px;
+  background: var(--card); border: 1px solid var(--green);
+  color: var(--green); padding: 12px 20px;
+  border-radius: 8px; font-size: 13px; font-weight: 500;
+  transform: translateY(80px); opacity: 0;
+  transition: all 0.3s; z-index: 999;
+  font-family: 'JetBrains Mono', monospace;
+}
+.toast.show { transform: translateY(0); opacity: 1; }
+
+/* ── FOOTER ─────────────────────────────────── */
+footer {
+  text-align: center; padding: 40px 24px;
+  border-top: 1px solid var(--border);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--muted);
+  letter-spacing: 1px;
+}
+
+@media (max-width: 640px) {
+  .market-grid { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 36px; letter-spacing: -1px; }
+  .hero-stats { gap: 20px; }
+  .timeline::before { left: 20px; }
+  .phase-dot { width: 40px; height: 40px; font-size: 10px; }
+  .salary-grid { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">SD / 2026</div>
+  <div class="nav-links">
+    <a href="#market">Market</a>
+    <a href="#plan">Plan</a>
+    <a href="#tracker">Daily</a>
+    <a href="#salaries">Targets</a>
+  </div>
+  <div class="streak-badge" id="navStreak">🔥 0 days</div>
+</nav>
+<!-- DATA_LAST_UPDATED:2026-06-16 -->
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-eyebrow">Market-Updated · June 2026</div>
+  <h1>
+    <span class="g1">MITWPU →</span><br>
+    <span class="g2">Global Finance</span>
+  </h1>
+  <p class="hero-sub">Your personalised roadmap rebuilt from 2026 market hiring data. ML Engineer roles up 163% YoY. Agentic AI up 136%. You're building the exact stack they're fighting over.</p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <span class="hero-stat-num">163%</span>
+      <span class="hero-stat-label">ML jobs YoY growth</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-num">136%</span>
+      <span class="hero-stat-label">Agentic AI demand surge</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-num">3.2×</span>
+      <span class="hero-stat-label">Demand vs supply ratio</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-num">$320K</span>
+      <span class="hero-stat-label">Agentic AI engineer ceiling</span>
+    </div>
+  </div>
+  <div class="cta-group">
+    <a href="#tracker" class="btn-primary">Open Daily Tracker →</a>
+    <a href="#plan" class="btn-ghost">See the Plan</a>
+  </div>
+</div>
+
+<!-- MARKET DEMAND -->
+<section id="market">
+  <div class="section-label">Live Market Data · Q2 2026</div>
+  <div class="section-title">What's Actually Hiring Right Now</div>
+  <div class="section-sub">Based on 387 ML job listings analysed, Selby Jennings quant hiring data, and Q1/Q2 2026 market reports. This is what your stack must look like.</div>
+
+  <div class="market-grid" id="marketGrid">
+
+    <div class="market-card">
+      <div class="market-card-top">
+        <div class="market-skill">Agentic AI (LangGraph / CrewAI)</div>
+        <div class="market-delta fire">▲ +136%</div>
+      </div>
+      <div class="bar-track"><div class="bar-fill purple" data-width="97"></div></div>
+      <div class="market-note">Already in your stack — biggest edge</div>
+    </div>
+
+    <div class="market-card">
+      <div class="market-card-top">
+        <div class="market-skill">RAG Architecture + Vector DBs</div>
+        <div class="market-delta fire">▲ +135%</div>
+      </div>
+      <div class="bar-track"><div class="bar-fill purple" data-width="95"></div></div>
+      <div class="market-note">In 65% of all LLM job listings</div>
+    </div>
+
+    <div class="market-card">
+      <div class="market-card-top">
+        <div class="market-skill">MLOps (Docker / K8s / MLflow)</div>
+        <div class="market-delta hot">▲ +89%</div>
+      </div>
+      <div class="bar-track"><div class="bar-fill gold" data-width="89"></div></div>
+      <div class="market-note">+$15-30K salary premium over notebook-only</div>
+    </div>
+
+    <div class="market-card">
+      <div class="market-card-top">
+        <div class="market-skill">Python (Production-Grade)</div>
+        <div class="market-delta ">▲ steady</div>
+      </div>
+      <div class="bar-track"><div class="bar-fill green" data-width="100"></div></div>
+      <div class="market-note">Every fintech role. Non-negotiable.</div>
+    </div>
+
+    <div class="market-card">
+      <div class="market-card-top">
+        <div class="market-skill">C++ (Latency-Critical Systems)</div>
+        <div class="market-delta hot">▲ quant boom</div>
+      </div>
+      <div class="bar-track"><div class="bar-fill gold" data-width="82"></div></div>
+      <div class="market-note">HFT/quant firms: Python + C++ = premium hire</div>
+    </div>
+
+    <div class="market-card">
+      <div class="market-card-top">
+        <div class="market-skill">LLM Fine-Tuning (LoRA / QLoRA)</div>
+        <div class="market-delta fire">▲ +135%</div>
+      </div>
+      <div class="bar-track"><div class="bar-fill purple" data-width="91"></div></div>
+      <div class="market-note">$220-280K specialist salary band</div>
+    </div>
+
+    <div class="market-card">
+      <div class="market-card-top">
+        <div class="market-skill">Apache Spark / Big Data Pipelines</div>
+        <div class="market-delta hot">▲ fintech critical</div>
+      </div>
+      <div class="bar-track"><div class="bar-fill gold" data-width="78"></div></div>
+      <div class="market-note">Big Data elective = rare asset</div>
+    </div>
+
+    <div class="market-card">
+      <div class="market-card-top">
+        <div class="market-skill">Cloud ML (AWS SageMaker / GCP Vertex)</div>
+        <div class="market-delta hot">▲ +30-40% salary</div>
+      </div>
+      <div class="bar-track"><div class="bar-fill gold" data-width="84"></div></div>
+      <div class="market-note">AWS cert = 20-25% salary premium</div>
+    </div>
+  </div>
+</section>
+
+<!-- PLAN -->
+<section id="plan">
+  <div class="section-label">Updated for 2026 Market</div>
+  <div class="section-title">The New Plan — Click to Expand Each Phase</div>
+  <div class="section-sub">Rebuilt around what's actually hiring. Agentic AI, RAG, and production ML are now core — not optional add-ons. Click each phase to see the skills and mark them off.</div>
+
+  <div class="timeline" id="timeline">
+
+    <div class="phase">
+      <div class="phase-dot active" onclick="togglePhase(0)">P1</div>
+      <div class="phase-body" onclick="togglePhase(0)">
+        <div class="phase-header">
+          <div>
+            <div class="phase-meta">NOW → Month 3 · Foundation Lock-In</div>
+            <div class="phase-name">Fix the Base. No Shortcuts.</div>
+            <div class="phase-tags"><span class="tag">Python</span>
+<span class="tag">Math</span>
+<span class="tag">SQL</span>
+<span class="tag">Git</span></div>
+          </div>
+          <div class="phase-expand">+</div>
+        </div>
+        <div class="phase-content">
+          <div class="skill-list">
+            <div class="skill-item" onclick="toggleSkill(this)">
+              <div class="skill-check">✓</div>
+              <div class="skill-info">
+                <div class="skill-name">Python — Pandas, NumPy, Matplotlib</div>
+                <div class="skill-why">kaggle.com/learn/python + pandas — free, 3 days each</div>
+              </div>
+              <div class="skill-priority p-critical">CRITICAL</div>
+            </div>
+            <div class="skill-item" onclick="toggleSkill(this)">
+              <div class="skill-check">✓</div>
+              <div class="skill-info">
+                <div class="skill-name">Linear Algebra — 3Blue1Brown Essence of LA</div>
+                <div class="skill-why">youtube.com/3blue1brown — 4 hrs</div>
+              </div>
+              <div class="skill-priority p-critical">CRITICAL</div>
+            </div>
+            <div class="skill-item" onclick="toggleSkill(this)">
+              <div class="skill-check">✓</div>
+              <div class="skill-info">
+                <div class="skill-name">Statistics + Probability — StatQuest</div>
+                <div class="skill-why">Bayes, distributions, hypothesis testing</div>
+              </div>
+              <div class="skill-priority p-critical">CRITICAL</div>
+            </div>
+            <div class="skill-item" onclick="toggleSkill(this)">
+              <div class="skill-check">✓</div>
+              <div class="skill-info">
+                <div class="skill-name">SQL — LeetCode Top 50 SQL Problems</div>
+                <div class="skill-why">Every fintech interview tests this</div>
+              </div>
+              <div class="skill-priority p-critical">CRITICAL</div>
+            </div>
+            <div class="skill-item" onclick="toggleSkill(this)">
+              <div class="skill-check">✓</div>
+              <div class="skill-info">
+                <div class="skill-name">Git + GitHub — Daily green commits</div>
+                <div class="skill-why">Your public CV</div>
+              </div>
+              <div class="skill-priority p-high">HIGH</div>
+            </div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-dot" onclick="togglePhase(1)">P2</div>
+      <div class="phase-body" onclick="togglePhase(1)">
+        <div class="phase-header">
+          <div>
+            <div class="phase-meta">Month 3–6 · Core ML + First Projects</div>
+            <div class="phase-name">Classical ML → First Two Projects</div>
+            <div class="phase-tags"><span class="tag">Scikit-learn</span>
+<span class="tag">XGBoost</span>
+<span class="tag">EDA</span>
+<span class="tag">Kaggle</span></div>
+          </div>
+          <div class="phase-expand">+</div>
+        </div>
+        <div class="phase-content">
+          <div class="skill-list">
+            <div class="skill-item" onclick="toggleSkill(this)">
+              <div class="skill-check">✓</div>
+              <div class="skill-info">
+                <div class="skill-name">Scikit-learn — Intro + Intermediate ML (Kaggle)</div>
+                <div class="skill-why">Logistic Reg, RF, XGBoost</div>
+              </div>
+              <div class="skill-priority p-critical">CRITICAL</div>
+            </div>
+            <div class="skill-item" onclick="toggleSkill(this)">
+              <div class="skill-check">✓</div>
+              <div class="skill-info">
+                <div class="skill-name">XGBoost / LightGBM — Tabular data king</div>
+                <div class="skill-why">80% of fintech tabular ML</div>
+              </div>
+              <div class="skill-priority p-critical">CRITICAL</div>
+            </div>
+            <div class="skill-item" onclick="toggleSkill(this)">
+              <div class="skill-check">✓</div>
+              <div class="skill-info">
+                <div class="skill-name">Project 1: Credit Card Fraud Detection (with SHAP)</div>
+                <div class="skill-why">IEEE-CIS Kaggle dataset</div>
+              </div>
+              <div class="skill-priority p-critical">BUILD IT</div>
+            </div>
+            <div class="skill-item" onclick="toggleSkill(this)">
+              <div class="skill-check">✓</div>
+              <div class="skill-info">
+                <div class="skill-name">Project 2: Loan Default Prediction + SHAP</div>
+                <div class="skill-why">Banks legally need explainability</div>
+              </div>
+              <div class="skill-priority p-critical">BUILD IT</div>
+            </div>
+            <div class="skill-item" onclick="toggleSkill(this)">
+              <div class="skill-check">✓</div>
+              <div class="skill-info">
+                <div class="skill-name">Enter Kaggle IEEE Fraud Competition</div>
+                <div class="skill-why">Explore data, submit first model</div>
+              </div>
+              <div class="skill-priority p-high">HIGH</div>
+            </div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-dot" onclick="togglePhase(2)">P3</div>
+      <div class="phase-body" onclick="togglePhase(2)">
+        <div class="phase-header">
+          <div>
+            <div class="phase-meta">Month 6–9 · NEW in 2026 — RAG + Agentic AI</div>
+            <div class="phase-name">The 2026 Stack: RAG + Agents + LLMs</div>
+            <div class="phase-tags"><span class="tag">RAG</span>
+<span class="tag">LangGraph</span>
+<span class="tag">Vector DBs</span></div>
+          </div>
+          <div class="phase-expand">+</div>
+        </div>
+        <div class="phase-content">
+          <div class="skill-list">
+            <div class="skill-item" onclick="toggleSkill(this)">
+              <div class="skill-check">✓</div>
+              <div class="skill-info">
+                <div class="skill-name">RAG Architecture — Pinecone / Weaviate / ChromaDB</div>
+                <div class="skill-why">65% of all LLM job listings</div>
+              </div>
+              <div class="skill-priority p-critical">CRITICAL</div>
+            </div>
+            <div class="skill-item" onclick="toggleSkill(this)">
+              <div class="skill-check">✓</div>
+              <div class="skill-info">
+                <div class="skill-name">LangGraph — Stateful Agentic Workflows</div>
+                <div class="skill-why">You already know this from SENRA</div>
+              </div>
+              <div class="skill-priority p-critical">CRITICAL</div>
+            </div>
+            <div class="skill-item" onclick="toggleSkill(this)">
+              <div class="skill-check">✓</div>
+              <div class="skill-info">
+                <div class="skill-name">Project 3: Financial RAG Agent (SEC Filings / News)</div>
+                <div class="skill-why">RAG over 10-K filings + LangGraph agent</div>
+              </div>
+              <div class="skill-priority p-critical">BUILD IT</div>
+            </div>
+            <div class="skill-item" onclick="toggleSkill(this)">
+              <div class="skill-check">✓</div>
+              <div class="skill-info">
+                <div class="skill-name">LLM Fine-Tuning — LoRA / QLoRA basics</div>
+                <div class="skill-why">+135% demand</div>
+              </div>
+              <div class="skill-priority p-high">HIGH</div>
+            </div>
+            <div class="skill-item" onclick="toggleSkill(this)">
+              <div class="skill-check">✓</div>
+              <div class="skill-info">
+                <div class="skill-name">PyTorch Fundamentals — fast.ai course</div>
+                <div class="skill-why">80%+ of ML job listings</div>
+              </div>
+              <div class="skill-priority p-high">HIGH</div>
+            </div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-dot" onclick="togglePhase(3)">P4</div>
+      <div class="phase-body" onclick="togglePhase(3)">
+        <div class="phase-header">
+          <div>
+            <div class="phase-meta">Month 9–14 · MLOps + Production Systems</div>
+            <div class="phase-name">Deploy Like a Senior Engineer</div>
+            <div class="phase-tags"><span class="tag">MLOps</span>
+<span class="tag">Docker</span>
+<span class="tag">FastAPI</span>
+<span class="tag">AWS</span></div>
+          </div>
+          <div class="phase-expand">+</div>
+        </div>
+        <div class="phase-content">
+          <div class="skill-list">
+            <div class="skill-item" onclick="toggleSkill(this)">
+              <div class="skill-check">✓</div>
+              <div class="skill-info">
+                <div class="skill-name">Docker + Kubernetes basics</div>
+                <div class="skill-why">2026 default stack</div>
+              </div>
+              <div class="skill-priority p-critical">CRITICAL</div>
+            </div>
+            <div class="skill-item" onclick="toggleSkill(this)">
+              <div class="skill-check">✓</div>
+              <div class="skill-info">
+                <div class="skill-name">FastAPI — Serve ML Models as APIs</div>
+                <div class="skill-why">Build an endpoint for your fraud model</div>
+              </div>
+              <div class="skill-priority p-critical">CRITICAL</div>
+            </div>
+            <div class="skill-item" onclick="toggleSkill(this)">
+              <div class="skill-check">✓</div>
+              <div class="skill-info">
+                <div class="skill-name">MLflow — Experiment Tracking</div>
+                <div class="skill-why">Standard in every serious ML team</div>
+              </div>
+              <div class="skill-priority p-high">HIGH</div>
+            </div>
+            <div class="skill-item" onclick="toggleSkill(this)">
+              <div class="skill-check">✓</div>
+              <div class="skill-info">
+                <div class="skill-name">AWS SageMaker / GCP Vertex AI</div>
+                <div class="skill-why">AWS ML cert = +20-25% salary premium</div>
+              </div>
+              <div class="skill-priority p-high">HIGH</div>
+            </div>
+            <div class="skill-item" onclick="toggleSkill(this)">
+              <div class="skill-check">✓</div>
+              <div class="skill-info">
+                <div class="skill-name">Project 4: Real-Time Anomaly Detection (Kafka + Spark)</div>
+                <div class="skill-why">Your Big Data elective shines here</div>
+              </div>
+              <div class="skill-priority p-critical">BUILD IT</div>
+            </div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-dot" onclick="togglePhase(4)">P5</div>
+      <div class="phase-body" onclick="togglePhase(4)">
+        <div class="phase-header">
+          <div>
+            <div class="phase-meta">Month 14–20 · Fintech Specialisation + Global Prep</div>
+            <div class="phase-name">Quant Finance Stack + Global Credentials</div>
+            <div class="phase-tags"><span class="tag">Time Series</span>
+<span class="tag">GNNs</span>
+<span class="tag">AWS Cert</span>
+<span class="tag">IELTS</span></div>
+          </div>
+          <div class="phase-expand">+</div>
+        </div>
+        <div class="phase-content">
+          <div class="skill-list">
+            <div class="skill-item" onclick="toggleSkill(this)">
+              <div class="skill-check">✓</div>
+              <div class="skill-info">
+                <div class="skill-name">Time Series — LSTM + Prophet + ARIMA</div>
+                <div class="skill-why">Stock/risk forecasting</div>
+              </div>
+              <div class="skill-priority p-critical">CRITICAL</div>
+            </div>
+            <div class="skill-item" onclick="toggleSkill(this)">
+              <div class="skill-check">✓</div>
+              <div class="skill-info">
+                <div class="skill-name">Graph Neural Networks — Fraud Ring Detection</div>
+                <div class="skill-why">Rolls-Royce / Goldman explicitly request GNNs</div>
+              </div>
+              <div class="skill-priority p-high">HIGH</div>
+            </div>
+            <div class="skill-item" onclick="toggleSkill(this)">
+              <div class="skill-check">✓</div>
+              <div class="skill-info">
+                <div class="skill-name">AWS ML Specialty Certification</div>
+                <div class="skill-why">+20-25% salary premium</div>
+              </div>
+              <div class="skill-priority p-high">HIGH</div>
+            </div>
+            <div class="skill-item" onclick="toggleSkill(this)">
+              <div class="skill-check">✓</div>
+              <div class="skill-info">
+                <div class="skill-name">IELTS 7.5+ — UK/Singapore Visa Requirement</div>
+                <div class="skill-why">Revolut London, Goldman UK require this</div>
+              </div>
+              <div class="skill-priority p-high">HIGH</div>
+            </div>
+            <div class="skill-item" onclick="toggleSkill(this)">
+              <div class="skill-check">✓</div>
+              <div class="skill-info">
+                <div class="skill-name">LeetCode Top 150 — DSA for interviews</div>
+                <div class="skill-why">Round 1 of every Goldman/Stripe/Revolut interview</div>
+              </div>
+              <div class="skill-priority p-critical">CRITICAL</div>
+            </div>
+            <div class="skill-item" onclick="toggleSkill(this)">
+              <div class="skill-check">✓</div>
+              <div class="skill-info">
+                <div class="skill-name">Project 5: Financial Sentiment Agent (FinBERT + RAG)</div>
+                <div class="skill-why">Fine-tune FinBERT, correlate to price action</div>
+              </div>
+              <div class="skill-priority p-critical">BUILD IT</div>
+            </div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-dot" onclick="togglePhase(5)">P6</div>
+      <div class="phase-body" onclick="togglePhase(5)">
+        <div class="phase-header">
+          <div>
+            <div class="phase-meta">Month 20–24 · Placement Season</div>
+            <div class="phase-name">Target: Goldman · Stripe · Revolut · Citadel</div>
+            <div class="phase-tags"><span class="tag">London first</span>
+<span class="tag">Singapore</span>
+<span class="tag">NY eventually</span></div>
+          </div>
+          <div class="phase-expand">+</div>
+        </div>
+        <div class="phase-content">
+          <div class="skill-list">
+            <div class="skill-item" onclick="toggleSkill(this)">
+              <div class="skill-check">✓</div>
+              <div class="skill-info">
+                <div class="skill-name">ML System Design Interview Prep</div>
+                <div class="skill-why">Practice 10 system design questions out loud</div>
+              </div>
+              <div class="skill-priority p-critical">CRITICAL</div>
+            </div>
+            <div class="skill-item" onclick="toggleSkill(this)">
+              <div class="skill-check">✓</div>
+              <div class="skill-info">
+                <div class="skill-name">LinkedIn Alumni Outreach</div>
+                <div class="skill-why">MITWPU + target companies, 5/week for referrals</div>
+              </div>
+              <div class="skill-priority p-high">HIGH</div>
+            </div>
+            <div class="skill-item" onclick="toggleSkill(this)">
+              <div class="skill-check">✓</div>
+              <div class="skill-info">
+                <div class="skill-name">Kaggle Expert Rank</div>
+                <div class="skill-why">Recruiters from Two Sigma/Citadel cold DM you</div>
+              </div>
+              <div class="skill-priority p-high">HIGH</div>
+            </div>
+            <div class="skill-item" onclick="toggleSkill(this)">
+              <div class="skill-check">✓</div>
+              <div class="skill-info">
+                <div class="skill-name">GitHub — 3 pinned fintech projects, 100+ stars</div>
+                <div class="skill-why">Your GitHub IS your passport</div>
+              </div>
+              <div class="skill-priority p-critical">CRITICAL</div>
+            </div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- DAILY TRACKER -->
+<section id="tracker">
+  <div class="section-label">Daily Execution</div>
+  <div class="section-title">Today's Tasks</div>
+  <div class="section-sub">Tick everything off. Miss a day = streak resets. No exceptions.</div>
+
+  <div class="tracker-wrap">
+    <div class="tracker-header">
+      <div>
+        <div class="tracker-title">Daily Goals</div>
+        <div class="date-display" id="todayDate"></div>
+      </div>
+      <div class="streak-display">
+        <span class="streak-num" id="streakNum">0</span>
+        <div>
+          <div style="font-size:18px">🔥</div>
+          <div class="streak-label">day streak</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" id="progressFill" style="width:0%"></div>
+    </div>
+    <div class="progress-text">
+      <span id="progressLabel">0 / 6 tasks done today</span>
+      <span id="progressPct">0%</span>
+    </div>
+
+    <div class="daily-tasks" id="dailyTasks" style="margin-top:20px">
+      <!-- Tasks injected by JS -->
+    </div>
+
+    <button class="btn-reset" onclick="resetToday()">↺ Reset today's tasks</button>
+  </div>
+
+  <!-- STREAK CALENDAR -->
+  <div class="tracker-wrap">
+    <div class="tracker-title" style="margin-bottom:8px">Streak Calendar — June 2026</div>
+    <div style="font-size:12px;color:var(--muted);margin-bottom:12px">Click a day to mark it complete (or undo it)</div>
+    <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:6px">
+      <div class="cal-day-label">MON</div>
+      <div class="cal-day-label">TUE</div>
+      <div class="cal-day-label">WED</div>
+      <div class="cal-day-label">THU</div>
+      <div class="cal-day-label">FRI</div>
+      <div class="cal-day-label">SAT</div>
+      <div class="cal-day-label">SUN</div>
+    </div>
+    <div class="cal-grid" id="calGrid"></div>
+    <div style="display:flex;gap:16px;margin-top:12px;font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace">
+      <span><span style="display:inline-block;width:10px;height:10px;background:var(--green);border-radius:2px;margin-right:4px;opacity:0.7"></span>Done</span>
+      <span><span style="display:inline-block;width:10px;height:10px;background:rgba(124,109,247,0.3);border-radius:2px;margin-right:4px;border:1px solid var(--accent)"></span>Today</span>
+      <span><span style="display:inline-block;width:10px;height:10px;background:var(--dim);border-radius:2px;margin-right:4px"></span>Missed / Future</span>
+    </div>
+  </div>
+</section>
+
+<!-- SALARIES -->
+<section id="salaries">
+  <div class="section-label">Target Companies · 2026 Verified Data</div>
+  <div class="section-title">Where You're Going. What They Pay.</div>
+  <div class="section-sub">Salary ranges from Selby Jennings, Robert Half, and Hunter Bond Q1/Q2 2026 reports. Total comp including equity.</div>
+
+  <div class="salary-grid">
+
+    <div class="salary-card">
+      <div class="salary-flag">⚡</div>
+      <div class="salary-role">ML Quant Researcher</div>
+      <div class="salary-company">CITADEL / JANE STREET · NY / LONDON</div>
+      <div class="salary-num">$250K–$600K+</div>
+      <div class="salary-note">Hardest to crack. Need MS + deep math. Endgame.</div>
+    </div>
+
+    <div class="salary-card">
+      <div class="salary-flag">🏦</div>
+      <div class="salary-role">ML Engineer</div>
+      <div class="salary-company">GOLDMAN SACHS · NY / LONDON</div>
+      <div class="salary-num">$180K–$280K</div>
+      <div class="salary-note">India gate available → internal transfer.</div>
+    </div>
+
+    <div class="salary-card">
+      <div class="salary-flag">🌐</div>
+      <div class="salary-role">ML Engineer (Fraud/Risk)</div>
+      <div class="salary-company">STRIPE · SF / REMOTE / DUBLIN</div>
+      <div class="salary-num">$200K–$320K</div>
+      <div class="salary-note">Most reachable top-tier. Visa-friendly.</div>
+    </div>
+
+    <div class="salary-card">
+      <div class="salary-flag">🇬🇧</div>
+      <div class="salary-role">ML Engineer</div>
+      <div class="salary-company">REVOLUT · LONDON / LISBON</div>
+      <div class="salary-num">£80K–£160K</div>
+      <div class="salary-note">Sponsors UK visa. Hires from India.</div>
+    </div>
+
+    <div class="salary-card">
+      <div class="salary-flag">🇸🇬</div>
+      <div class="salary-role">Applied ML Engineer</div>
+      <div class="salary-company">JPMORGAN / GS · SINGAPORE</div>
+      <div class="salary-num">$120K–$200K SGD</div>
+      <div class="salary-note">Easiest visa. Stepping stone to NY.</div>
+    </div>
+
+    <div class="salary-card">
+      <div class="salary-flag">🤖</div>
+      <div class="salary-role">Agentic AI Engineer</div>
+      <div class="salary-company">FINTECH STARTUPS · REMOTE / GLOBAL</div>
+      <div class="salary-num">$185K–$320K</div>
+      <div class="salary-note">You already have this skill. Apply now.</div>
+    </div>
+
+    <div class="salary-card">
+      <div class="salary-flag">💸</div>
+      <div class="salary-role">ML Engineer</div>
+      <div class="salary-company">WISE / MONZO · LONDON / REMOTE</div>
+      <div class="salary-num">£65K–£130K</div>
+      <div class="salary-note">Most accessible London entry.</div>
+    </div>
+
+    <div class="salary-card">
+      <div class="salary-flag">🇦🇪</div>
+      <div class="salary-role">Quant / ML Engineer</div>
+      <div class="salary-company">GOLDMAN / JPMORGAN · DUBAI (DIFC)</div>
+      <div class="salary-num">AED 30K–70K/mo</div>
+      <div class="salary-note">Zero tax. Easiest visa. Stepping stone.</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  SIDDHANT DESHMANE · MITWPU · 2026 · DATA-DRIVEN ROADMAP · NO ZERO DAYS
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ── STATE ────────────────────────────────────────────────────────────────────
+const STATE_KEY = 'sd_roadmap_v3';
+function loadState() {
+  try { return JSON.parse(localStorage.getItem(STATE_KEY)) || {}; } catch { return {}; }
+}
+function saveState(s) {
+  localStorage.setItem(STATE_KEY, JSON.stringify(s));
+}
+let state = loadState();
+if (!state.streak) state.streak = 0;
+if (!state.calDays) state.calDays = {};
+if (!state.todayTasks) state.todayTasks = {};
+if (!state.skills) state.skills = {};
+if (!state.lastDate) state.lastDate = '';
+
+// ── TOAST ────────────────────────────────────────────────────────────────────
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// ── DAILY TASKS ──────────────────────────────────────────────────────────────
+const TASKS = [
+  { id:'t1', cat:'Math / Linear Algebra', name:'Watch 3Blue1Brown: 1 video (LA playlist)', time:'30 min' },
+  { id:'t2', cat:'Python / ML', name:'Code session: Kaggle course or project work', time:'45 min' },
+  { id:'t3', cat:'LeetCode / DSA', name:'Solve 2 LeetCode problems (Easy or Medium)', time:'30 min' },
+  { id:'t4', cat:'RAG / Agents', name:'Read 1 article on RAG, LangGraph, or Agentic AI', time:'20 min' },
+  { id:'t5', cat:'GitHub', name:'Push at least 1 commit to any project', time:'10 min' },
+  { id:'t6', cat:'Streak', name:'Update streak calendar below', time:'2 min' },
+];
+
+function getTodayKey() {
+  return new Date().toISOString().slice(0,10);
+}
+
+function renderTasks() {
+  const container = document.getElementById('dailyTasks');
+  const today = getTodayKey();
+  const done = state.todayTasks[today] || {};
+  container.innerHTML = '';
+
+  TASKS.forEach(task => {
+    const isDone = !!done[task.id];
+    const div = document.createElement('div');
+    div.className = 'daily-task' + (isDone ? ' done-task' : '');
+    div.innerHTML = `
+      <div class="task-check ${isDone ? 'ticked' : ''}">✓</div>
+      <div class="task-text">
+        <div class="task-name">${task.name}</div>
+        <div class="task-cat">${task.cat}</div>
+      </div>
+      <div class="task-time">${task.time}</div>
+    `;
+    div.onclick = () => toggleTask(task.id);
+    container.appendChild(div);
+  });
+  updateProgress();
+}
+
+function toggleTask(id) {
+  const today = getTodayKey();
+  if (!state.todayTasks[today]) state.todayTasks[today] = {};
+  const was = !!state.todayTasks[today][id];
+  state.todayTasks[today][id] = !was;
+  saveState(state);
+  renderTasks();
+  checkStreakUpdate();
+  if (!was) toast('✓ Task done!');
+}
+
+function updateProgress() {
+  const today = getTodayKey();
+  const done = state.todayTasks[today] || {};
+  const count = Object.values(done).filter(Boolean).length;
+  const total = TASKS.length;
+  const pct = Math.round((count/total)*100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent = `${count} / ${total} tasks done today`;
+  document.getElementById('progressPct').textContent = pct + '%';
+}
+
+function checkStreakUpdate() {
+  const today = getTodayKey();
+  const done = state.todayTasks[today] || {};
+  const count = Object.values(done).filter(Boolean).length;
+  if (count >= 3 && !state.calDays[today]) {
+    state.calDays[today] = true;
+    if (state.lastDate) {
+      const last = new Date(state.lastDate);
+      const now = new Date(today);
+      const diff = (now - last) / 86400000;
+      if (diff === 1) { state.streak++; }
+      else if (diff > 1) { state.streak = 1; }
+    } else { state.streak = 1; }
+    state.lastDate = today;
+    saveState(state);
+    renderStreak();
+    renderCal();
+    toast('🔥 Streak updated: ' + state.streak + ' days!');
+  }
+}
+
+function resetToday() {
+  const today = getTodayKey();
+  state.todayTasks[today] = {};
+  saveState(state);
+  renderTasks();
+}
+
+function renderStreak() {
+  document.getElementById('streakNum').textContent = state.streak;
+  document.getElementById('navStreak').textContent = '🔥 ' + state.streak + ' days';
+}
+
+// ── CALENDAR ─────────────────────────────────────────────────────────────────
+function renderCal() {
+  const grid = document.getElementById('calGrid');
+  grid.innerHTML = '';
+  const today = getTodayKey();
+  const year = 2026; const month = 5; // June 2026
+  const firstDay = new Date(year, month, 1).getDay(); // 0=Sun
+  const daysInMonth = new Date(year, month+1, 0).getDate();
+  // Adjust for Mon start
+  const startOffset = (firstDay === 0 ? 6 : firstDay - 1);
+  for (let i = 0; i < startOffset; i++) {
+    const blank = document.createElement('div');
+    blank.style.background = 'transparent';
+    grid.appendChild(blank);
+  }
+  for (let d = 1; d <= daysInMonth; d++) {
+    const key = `2026-06-${String(d).padStart(2,'0')}`;
+    const cell = document.createElement('div');
+    cell.className = 'cal-day';
+    if (state.calDays[key]) cell.classList.add('filled');
+    if (key === today) cell.classList.add('today');
+    cell.title = `June ${d}`;
+    cell.onclick = () => toggleCalDay(key);
+    grid.appendChild(cell);
+  }
+}
+
+function toggleCalDay(key) {
+  state.calDays[key] = !state.calDays[key];
+  // Recalculate streak
+  recalcStreak();
+  saveState(state);
+  renderCal();
+  renderStreak();
+}
+
+function recalcStreak() {
+  const today = getTodayKey();
+  let streak = 0;
+  let d = new Date(today);
+  while (true) {
+    const key = d.toISOString().slice(0,10);
+    if (state.calDays[key]) { streak++; d.setDate(d.getDate()-1); }
+    else break;
+  }
+  state.streak = streak;
+}
+
+// ── PHASE TOGGLES ────────────────────────────────────────────────────────────
+function togglePhase(idx) {
+  const phases = document.querySelectorAll('.phase');
+  const phase = phases[idx];
+  const content = phase.querySelector('.phase-content');
+  const body = phase.querySelector('.phase-body');
+  const expand = phase.querySelector('.phase-expand');
+  const dot = phase.querySelector('.phase-dot');
+  const isOpen = content.classList.contains('open');
+  content.classList.toggle('open', !isOpen);
+  body.classList.toggle('open', !isOpen);
+  expand.textContent = isOpen ? '+' : '−';
+  dot.classList.toggle('active', !isOpen);
+}
+
+// ── SKILL TOGGLES ────────────────────────────────────────────────────────────
+function toggleSkill(el) {
+  el.stopPropagation && el.stopPropagation();
+  const check = el.querySelector('.skill-check');
+  const isDone = check.classList.contains('checked');
+  check.classList.toggle('checked', !isDone);
+  el.classList.toggle('done', !isDone);
+  if (!isDone) toast('✓ Skill marked done!');
+}
+
+// ── MARKET BARS ANIMATE ──────────────────────────────────────────────────────
+function animateBars() {
+  document.querySelectorAll('.bar-fill[data-width]').forEach(bar => {
+    const w = bar.dataset.width;
+    setTimeout(() => bar.style.width = w + '%', 300);
+  });
+}
+
+// ── DATE DISPLAY ─────────────────────────────────────────────────────────────
+function setDate() {
+  const now = new Date();
+  const opts = { weekday:'long', year:'numeric', month:'long', day:'numeric' };
+  document.getElementById('todayDate').textContent = now.toLocaleDateString('en-US', opts);
+}
+
+// ── INIT ─────────────────────────────────────────────────────────────────────
+setDate();
+renderTasks();
+renderStreak();
+renderCal();
+
+// Animate bars on scroll
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) animateBars(); });
+}, { threshold: 0.3 });
+const marketGrid = document.getElementById('marketGrid');
+if (marketGrid) observer.observe(marketGrid);
+
+// Auto-open Phase 1
+togglePhase(0);
+</script>
+</body>
+</html>
